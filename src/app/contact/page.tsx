@@ -1,14 +1,14 @@
 import React from "react";
-import HomeClient from "./page.client";
+import ContactClient from "./page.client";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Home | CNG Tech Ltd.",
+  title: "Contact Us | CNG Tech Ltd.",
   description: "Tailored CNG solutions to meet your specific requirements.",
   icons: ["/favicon.png"],
 };
-const Home = () => {
-  return <HomeClient />;
+const Contact = () => {
+  return <ContactClient />;
 };
 
-export default Home;
+export default Contact;
