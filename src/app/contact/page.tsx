@@ -3,7 +3,7 @@ import ContactClient from "./page.client";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Contact Us | CNG Tech Ltd.",
+  title: "Contact Us | CNG-Tech Edge Limited.",
   description: "Tailored CNG solutions to meet your specific requirements.",
   icons: ["/favicon.png"],
 };

@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { Link, Button } from "@radix-ui/themes";
+import { Link } from "@radix-ui/themes";
 import { BarChartIcon, SwitchIcon, RocketIcon } from "@radix-ui/react-icons";
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -137,7 +137,7 @@ export default function HomeClient() {
       alt: "Drive Into the Future with Cleaner, Safer, and Cheaper Fuel!",
       title: "Drive Into the Future with Cleaner, Safer, and Cheaper Fuel!",
       content:
-        "Join the energy revolution with CNG Technologies - delivering cost-effective, eco-friendly solutions",
+        "Join the energy revolution with CNG-Tech Edge Limited - delivering cost-effective, eco-friendly solutions",
       button: {
         text: "Learn More About CNG Benefits",
         url: "/our-services",
@@ -154,12 +154,12 @@ export default function HomeClient() {
               className={`swiper-slide-9183 min-h-[400px] md:min-h-[600px] flex content-center justify-center`}
               key={index}
               style={{
-                backgroundImage: `url("${process.env.NEXT_PUBLIC_SERVER_URL}${item.image}")`,
+                backgroundImage: `url("${item.image}")`,
                 backgroundSize: "cover",
                 backgroundPosition: "50% 70%",
               }}>
               <div className="absolute inset-0 bg-gradient-to-tr from-black via-red to-black opacity-50"></div>
-              <div className="swiper-slide-content swiper-slide-content-2f5e flex flex-col text-center gap-2 md:gap-4 md:max-w-[60%] m-auto relative">
+              <div className="swiper-slide-content swiper-slide-content-2f5e flex flex-col text-center gap-4 md:gap-6 md:max-w-[60%] m-auto relative">
                 <h3
                   className="text-white text-2xl md:text-6xl font-black px-5 text-center text-shadow-2xl"
                   data-swiper-parallax="-100">
@@ -168,10 +168,12 @@ export default function HomeClient() {
                 <p className="px-5 text-white font-medium text-center text-shadow-lg md:text-3xl">
                   {item.content}
                 </p>
-                <Link href={item.button.url} className="mx-9">
-                  <Button variant="solid" size={"4"} highContrast>
+                <Link
+                  href={`${item.button.url}`}
+                  className="mx-9 mt-6 text-white-900">
+                  <span className="px-6 py-3 bg-white text-green-600 font-semibold rounded shadow hover:bg-gray-100">
                     {item.button.text}
-                  </Button>
+                  </span>
                 </Link>
               </div>
             </SwiperSlide>
@@ -193,7 +195,7 @@ export default function HomeClient() {
             <div className="text-center md:text-left">
               <h1 className="text-4xl font-bold mb-4">
                 Welcome to{" "}
-                <span className="text-green-600">CNG Technologies Limited</span>
+                <span className="text-green-600">CNG-Tech Edge Limited</span>
               </h1>
               <p className="text-lg leading-relaxed text-gray-700">
                 Your trusted partner in sustainable energy solutions. We
@@ -261,9 +263,9 @@ export default function HomeClient() {
             unparalleled reliability.
           </p>
           <Link href="/our-services">
-            <button className="px-6 py-3 bg-white text-green-600 font-semibold rounded shadow hover:bg-gray-100">
+            <span className="px-6 py-3 bg-white text-green-600 font-semibold rounded shadow hover:bg-gray-100">
               Learn More
-            </button>
+            </span>
           </Link>
         </div>
       </footer>

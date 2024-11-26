@@ -18,7 +18,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Home | CNG Tech Ltd.",
+  title: "Home | CNG-Tech Edge Limited.",
   description: "Tailored CNG solutions to meet your specific requirements.",
   icons: ["/favicon.png"],
 };

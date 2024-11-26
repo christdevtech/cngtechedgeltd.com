@@ -38,7 +38,7 @@ const ContactClient: React.FC = () => {
           Contact Us
         </h1>
         <p className="text-lg md:text-2xl font-medium text-shadow-lg px-4">
-          Get in Touch with CNG Technologies Limited
+          Get in Touch with CNG-Tech Edge Limited
         </p>
       </section>
 
@@ -46,8 +46,8 @@ const ContactClient: React.FC = () => {
       <section className="py-12 bg-white">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <p className="text-lg text-gray-700 leading-relaxed mb-8">
-            We're here to provide innovative energy solutions and answer all
-            your questions. Let us help you embark on a journey to greener,
+            We&apos;re here to provide innovative energy solutions and answer
+            all your questions. Let us help you embark on a journey to greener,
             safer, and more economical energy.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

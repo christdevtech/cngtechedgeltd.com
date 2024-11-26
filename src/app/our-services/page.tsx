@@ -3,7 +3,7 @@ import ServicesClient from "./page.client";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Our Services | CNG Tech Ltd.",
+  title: "Our Services | CNG-Tech Edge Limited.",
   description: "Tailored CNG solutions to meet your specific requirements.",
   icons: ["/favicon.png"],
 };

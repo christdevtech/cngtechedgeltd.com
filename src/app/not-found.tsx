@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Page Not Found | CNG Tech Ltd.",
+  title: "Page Not Found | CNG-Tech Edge Limited.",
   description: "Tailored CNG solutions to meet your specific requirements.",
   icons: ["/favicon.png"],
 };
@@ -13,7 +13,7 @@ export default function NotFound() {
         404 - Page Not Found
       </h1>
       <p className="text-lg text-gray-700 mb-6">
-        Oops! The page you're looking for doesn't exist.
+        Oops! The page you&apos;re looking for doesn&apos;t exist.
       </p>
       <Link href="/">
         <button className="px-6 py-3 bg-green-600 text-white rounded-lg shadow-lg hover:bg-green-900 transition-all">
