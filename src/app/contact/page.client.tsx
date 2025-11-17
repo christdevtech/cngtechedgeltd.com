@@ -1,7 +1,6 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import emailjs from "emailjs-com";
 
 const ContactClient: React.FC = () => {
   const {
@@ -10,24 +9,31 @@ const ContactClient: React.FC = () => {
     formState: { errors, isSubmitting },
   } = useForm();
 
+  const [sliderValue, setSliderValue] = useState(0);
+  const sliderMax = 100;
+  const isSliderConfirmed = sliderValue === sliderMax;
+
   // @typescript-eslint/no-explicit-any
-  const onSubmit = (data: any) => {
-    emailjs
-      .send(
-        "service_4mq4pi5",
-        "template_u4v62le",
-        {
+  const onSubmit = async (data: any) => {
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
           name: data.name,
           email: data.email,
           phone: data.phone,
           message: data.message,
-        },
-        "6Wm4qmw_kZfWgyWp3" // EmailJS User ID
-      )
-      .then(
-        () => alert("Message sent successfully!"),
-        (error) => alert(`Failed to send message: ${error.text}`)
-      );
+        }),
+      });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err?.error || "Failed to send message");
+      }
+      alert("Message sent successfully! Please check your email for a confirmation.");
+    } catch (error: any) {
+      alert(`Failed to send message: ${error?.message || "Unknown error"}`);
+    }
   };
 
   return (
@@ -188,12 +194,23 @@ const ContactClient: React.FC = () => {
                 <p className="text-red-500 text-sm mt-1">Message is required</p>
               )}
             </div>
-            <button
-              type="submit"
-              className="w-full py-3 bg-green-600 text-white font-bold rounded-md hover:bg-green-700 transition disabled:opacity-50"
-              disabled={isSubmitting}>
-              {isSubmitting ? "Sending..." : "Send Message"}
-            </button>
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-gray-700">Slide to enable sending</label>
+              <input
+                type="range"
+                min={0}
+                max={sliderMax}
+                value={sliderValue}
+                onChange={(e) => setSliderValue(Number(e.target.value))}
+                className="w-full"
+              />
+              <button
+                type="submit"
+                className="w-full py-3 bg-green-600 text-white font-bold rounded-md hover:bg-green-700 transition disabled:opacity-50"
+                disabled={isSubmitting || !isSliderConfirmed}>
+                {isSubmitting ? "Sending..." : isSliderConfirmed ? "Send Message" : "Slide to Enable"}
+              </button>
+            </div>
           </form>
         </div>
       </section>
