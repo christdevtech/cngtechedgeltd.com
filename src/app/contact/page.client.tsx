@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
+import { toast } from "sonner";
 import {
   MobileIcon,
   EnvelopeClosedIcon,
@@ -67,11 +68,9 @@ const ContactClient: React.FC = () => {
         const err = await res.json().catch(() => ({}));
         throw new Error(err?.error || "Failed to send message");
       }
-      alert(
-        "Message sent successfully! Please check your email for a confirmation."
-      );
+      toast.success("Message sent successfully! Check your email for confirmation.");
     } catch (error: any) {
-      alert(`Failed to send message: ${error?.message || "Unknown error"}`);
+      toast.error(error?.message || "Failed to send message");
     }
   };
 

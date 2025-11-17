@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Cross1Icon, HamburgerMenuIcon } from "@radix-ui/react-icons";
+import { Toaster } from "sonner";
 
 const Header = () => {
   const [isClient, setIsClient] = useState(false);
@@ -24,6 +25,7 @@ const Header = () => {
 
   return (
     <Container py={"4"} className="shadow px-6 xl:px-0">
+      <Toaster position="top-center" richColors closeButton />
       <Flex gap={"6"} justify={"between"} align={"center"}>
         <Link href={"/"}>
           <Image
