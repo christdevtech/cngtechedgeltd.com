@@ -68,7 +68,9 @@ const ContactClient: React.FC = () => {
         const err = await res.json().catch(() => ({}));
         throw new Error(err?.error || "Failed to send message");
       }
-      toast.success("Message sent successfully! Check your email for confirmation.");
+      toast.success(
+        "Message sent successfully! Check your email for confirmation."
+      );
     } catch (error: any) {
       toast.error(error?.message || "Failed to send message");
     }
@@ -101,7 +103,7 @@ const ContactClient: React.FC = () => {
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.08 }}
-                viewport={{ once: true }}
+                viewport={{ once: false }}
                 className="group relative rounded-xl border border-gray-200 bg-white shadow hover:shadow-lg transition overflow-hidden"
               >
                 <div className="flex items-center gap-3 px-5 pt-5">
