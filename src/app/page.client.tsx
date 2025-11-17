@@ -2,7 +2,8 @@
 import Image from "next/image";
 import { Link } from "@radix-ui/themes";
 import { BarChartIcon, SwitchIcon, RocketIcon } from "@radix-ui/react-icons";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import {
   A11y,
@@ -26,6 +27,8 @@ import "swiper/css/parallax";
 import "swiper/css/scrollbar";
 
 export default function HomeClient() {
+  const [isClient, setIsClient] = useState(false);
+  useEffect(() => setIsClient(true), []);
   const whyUs = [
     {
       title: "Eco-Friendly Solutions",
@@ -159,23 +162,49 @@ export default function HomeClient() {
                 backgroundPosition: "50% 70%",
               }}>
               <div className="absolute inset-0 bg-gradient-to-tr from-black via-red to-black opacity-50"></div>
-              <div className="swiper-slide-content swiper-slide-content-2f5e flex flex-col text-center gap-4 md:gap-6 md:max-w-[60%] m-auto relative">
-                <h3
-                  className="text-white text-2xl md:text-6xl font-black px-5 text-center text-shadow-2xl"
-                  data-swiper-parallax="-100">
-                  {item.title}
-                </h3>
-                <p className="px-5 text-white font-medium text-center text-shadow-lg md:text-3xl">
-                  {item.content}
-                </p>
-                <Link
-                  href={`${item.button.url}`}
-                  className="mx-9 mt-6 text-white-900">
-                  <span className="px-6 py-3 bg-white text-green-600 font-semibold rounded shadow hover:bg-gray-100">
-                    {item.button.text}
-                  </span>
-                </Link>
-              </div>
+              {isClient ? (
+                <motion.div
+                  className="swiper-slide-content swiper-slide-content-2f5e flex flex-col text-center gap-4 md:gap-6 md:max-w-[60%] m-auto relative"
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                  viewport={{ once: false, amount: 0.3 }}
+                >
+                  <h3
+                    className="text-white text-2xl md:text-6xl font-black px-5 text-center text-shadow-2xl"
+                    data-swiper-parallax="-100">
+                    {item.title}
+                  </h3>
+                  <p className="px-5 text-white font-medium text-center text-shadow-lg md:text-3xl">
+                    {item.content}
+                  </p>
+                  <Link
+                    href={`${item.button.url}`}
+                    className="mx-9 mt-6 text-white-900">
+                    <span className="px-6 py-3 bg-white text-green-600 font-semibold rounded shadow hover:bg-gray-100">
+                      {item.button.text}
+                    </span>
+                  </Link>
+                </motion.div>
+              ) : (
+                <div className="swiper-slide-content swiper-slide-content-2f5e flex flex-col text-center gap-4 md:gap-6 md:max-w-[60%] m-auto relative">
+                  <h3
+                    className="text-white text-2xl md:text-6xl font-black px-5 text-center text-shadow-2xl"
+                    data-swiper-parallax="-100">
+                    {item.title}
+                  </h3>
+                  <p className="px-5 text-white font-medium text-center text-shadow-lg md:text-3xl">
+                    {item.content}
+                  </p>
+                  <Link
+                    href={`${item.button.url}`}
+                    className="mx-9 mt-6 text-white-900">
+                    <span className="px-6 py-3 bg-white text-green-600 font-semibold rounded shadow hover:bg-gray-100">
+                      {item.button.text}
+                    </span>
+                  </Link>
+                </div>
+              )}
             </SwiperSlide>
           ))}
         </Swiper>
@@ -183,28 +212,68 @@ export default function HomeClient() {
       <header className="relative bg-white shadow">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="py-12 flex flex-col md:flex-row items-center">
-            <div className="w-full md:full h-64 bg-gray-200 rounded-md mb-6 md:mb-0 md:mr-8 relative">
-              {/* Updated Image */}
-              <Image
-                src={"/images/team.jpg"}
-                alt="Welcome"
-                fill // Makes the image fill its parent
-                style={{ objectFit: "cover", borderRadius: "0.375rem" }} // Matches the parent border radius
-              />
-            </div>
-            <div className="text-center md:text-left">
-              <h1 className="text-4xl font-bold mb-4">
-                Welcome to{" "}
-                <span className="text-green-600">CNG-Tech Edge Limited</span>
-              </h1>
-              <p className="text-lg leading-relaxed text-gray-700">
-                Your trusted partner in sustainable energy solutions. We
-                revolutionize energy usage through cutting-edge compressed
-                natural gas (CNG) solutions that transform vehicles, generators,
-                and industrial equipment into cost-effective, eco-friendly,
-                high-performing assets.
-              </p>
-            </div>
+            {isClient ? (
+              <motion.div
+                className="w-full md:full h-64 bg-gray-200 rounded-md mb-6 md:mb-0 md:mr-8 relative"
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: false, amount: 0.3 }}
+              >
+                {/* Updated Image */}
+                <Image
+                  src={"/images/team.jpg"}
+                  alt="Welcome"
+                  fill // Makes the image fill its parent
+                  style={{ objectFit: "cover", borderRadius: "0.375rem" }} // Matches the parent border radius
+                />
+              </motion.div>
+            ) : (
+              <div className="w-full md:full h-64 bg-gray-200 rounded-md mb-6 md:mb-0 md:mr-8 relative">
+                {/* Updated Image */}
+                <Image
+                  src={"/images/team.jpg"}
+                  alt="Welcome"
+                  fill // Makes the image fill its parent
+                  style={{ objectFit: "cover", borderRadius: "0.375rem" }} // Matches the parent border radius
+                />
+              </div>
+            )}
+            {isClient ? (
+              <motion.div
+                className="text-center md:text-left"
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: false, amount: 0.3 }}
+              >
+                <h1 className="text-4xl font-bold mb-4">
+                  Welcome to{" "}
+                  <span className="text-green-600">CNG-Tech Edge Limited</span>
+                </h1>
+                <p className="text-lg leading-relaxed text-gray-700">
+                  Your trusted partner in sustainable energy solutions. We
+                  revolutionize energy usage through cutting-edge compressed
+                  natural gas (CNG) solutions that transform vehicles, generators,
+                  and industrial equipment into cost-effective, eco-friendly,
+                  high-performing assets.
+                </p>
+              </motion.div>
+            ) : (
+              <div className="text-center md:text-left">
+                <h1 className="text-4xl font-bold mb-4">
+                  Welcome to{" "}
+                  <span className="text-green-600">CNG-Tech Edge Limited</span>
+                </h1>
+                <p className="text-lg leading-relaxed text-gray-700">
+                  Your trusted partner in sustainable energy solutions. We
+                  revolutionize energy usage through cutting-edge compressed
+                  natural gas (CNG) solutions that transform vehicles, generators,
+                  and industrial equipment into cost-effective, eco-friendly,
+                  high-performing assets.
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </header>
@@ -217,12 +286,28 @@ export default function HomeClient() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {whyUs.map((item, index) => (
-              <div key={index} className="p-6 bg-white rounded-lg shadow">
-                <h3 className="text-xl font-semibold text-green-600 mb-4">
-                  {item.title}
-                </h3>
-                <p className="text-gray-700">{item.description}</p>
-              </div>
+              isClient ? (
+                <motion.div
+                  key={index}
+                  className="p-6 bg-white rounded-lg shadow"
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.05 }}
+                  viewport={{ once: false, amount: 0.2 }}
+                >
+                  <h3 className="text-xl font-semibold text-green-600 mb-4">
+                    {item.title}
+                  </h3>
+                  <p className="text-gray-700">{item.description}</p>
+                </motion.div>
+              ) : (
+                <div key={index} className="p-6 bg-white rounded-lg shadow">
+                  <h3 className="text-xl font-semibold text-green-600 mb-4">
+                    {item.title}
+                  </h3>
+                  <p className="text-gray-700">{item.description}</p>
+                </div>
+              )
             ))}
           </div>
         </div>
@@ -236,19 +321,42 @@ export default function HomeClient() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {benefits.map((item, index) => (
-              <div key={index} className="flex items-center">
-                <button
-                  className="p-4 bg-green-100 rounded-full flex items-center justify-center mr-4 shadow-sm"
-                  aria-label={item.title}>
-                  {item.icon}
-                </button>
-                <div>
-                  <h3 className="text-xl font-semibold text-green-600">
-                    {item.title}
-                  </h3>
-                  <p className="text-gray-700">{item.description}</p>
+              isClient ? (
+                <motion.div
+                  key={index}
+                  className="flex items-center"
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.05 }}
+                  viewport={{ once: false, amount: 0.2 }}
+                >
+                  <button
+                    className="p-4 bg-green-100 rounded-full flex items-center justify-center mr-4 shadow-sm"
+                    aria-label={item.title}>
+                    {item.icon}
+                  </button>
+                  <div>
+                    <h3 className="text-xl font-semibold text-green-600">
+                      {item.title}
+                    </h3>
+                    <p className="text-gray-700">{item.description}</p>
+                  </div>
+                </motion.div>
+              ) : (
+                <div key={index} className="flex items-center">
+                  <button
+                    className="p-4 bg-green-100 rounded-full flex items-center justify-center mr-4 shadow-sm"
+                    aria-label={item.title}>
+                    {item.icon}
+                  </button>
+                  <div>
+                    <h3 className="text-xl font-semibold text-green-600">
+                      {item.title}
+                    </h3>
+                    <p className="text-gray-700">{item.description}</p>
+                  </div>
                 </div>
-              </div>
+              )
             ))}
           </div>
         </div>

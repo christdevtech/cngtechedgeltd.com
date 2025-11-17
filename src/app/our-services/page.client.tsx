@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import {
   GearIcon,
@@ -61,27 +63,68 @@ const ServicesClient = () => {
     },
   ];
 
+  const [isClient, setIsClient] = useState(false);
+  useEffect(() => setIsClient(true), []);
+
   return (
     <div>
       <section className="relative bg-gradient-to-br from-green-800 via-green-700 to-green-900 text-white text-center py-16">
-        <h1 className="text-4xl md:text-6xl font-extrabold mb-4 text-shadow-2xl">
-          Our Services
-        </h1>
-        <p className="text-lg md:text-2xl font-medium text-shadow-lg px-4">
-          Comprehensive CNG Solutions for Every Need
-        </p>
+        {isClient ? (
+          <motion.h1
+            className="text-4xl md:text-6xl font-extrabold mb-4 text-shadow-2xl"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: false }}
+          >
+            Our Services
+          </motion.h1>
+        ) : (
+          <h1 className="text-4xl md:text-6xl font-extrabold mb-4 text-shadow-2xl">Our Services</h1>
+        )}
+        {isClient ? (
+          <motion.p
+            className="text-lg md:text-2xl font-medium text-shadow-lg px-4"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: false }}
+          >
+            Comprehensive CNG Solutions for Every Need
+          </motion.p>
+        ) : (
+          <p className="text-lg md:text-2xl font-medium text-shadow-lg px-4">Comprehensive CNG Solutions for Every Need</p>
+        )}
       </section>
       <section className="py-12 bg-white text-center">
         <div className=" p-9">
-          <div className="w-full md:1/2 max-w-[600px] h-64 bg-gray-200 rounded-lg mb-6 md:mb-6  relative clip m-auto">
-            <Image
-              src={"/images/truck.jpg"}
-              objectFit="cover"
-              style={{ borderRadius: "1rem" }}
-              fill
-              alt="conversion of truck"
-            />
-          </div>
+          {isClient ? (
+            <motion.div
+              className="w-full md:1/2 max-w-[600px] h-64 bg-gray-200 rounded-lg mb-6 md:mb-6  relative clip m-auto"
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: false }}
+            >
+              <Image
+                src={"/images/truck.jpg"}
+                objectFit="cover"
+                style={{ borderRadius: "1rem" }}
+                fill
+                alt="conversion of truck"
+              />
+            </motion.div>
+          ) : (
+            <div className="w-full md:1/2 max-w-[600px] h-64 bg-gray-200 rounded-lg mb-6 md:mb-6  relative clip m-auto">
+              <Image
+                src={"/images/truck.jpg"}
+                objectFit="cover"
+                style={{ borderRadius: "1rem" }}
+                fill
+                alt="conversion of truck"
+              />
+            </div>
+          )}
           <div className="max-w-4xl mx-auto px-4">
             <h2 className="text-3xl font-bold text-green-700 mb-4">
               At CNG-Tech Edge Limited
@@ -100,17 +143,37 @@ const ServicesClient = () => {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {services.map((service, index) => (
-              <div
-                key={index}
-                className="bg-white shadow-md hover:shadow-2xl rounded-lg p-6 flex flex-col items-center justify-center text-center">
-                <div className="w-16 h-16 bg-green-200 rounded-full flex items-center justify-center mb-4">
-                  {service.icon}
+              isClient ? (
+                <motion.div
+                  key={index}
+                  className="bg-white shadow-md hover:shadow-2xl rounded-lg p-6 flex flex-col items-center justify-center text-center"
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.05 }}
+                  viewport={{ once: false }}
+                >
+                  <div className="w-16 h-16 bg-green-200 rounded-full flex items-center justify-center mb-4">
+                    {service.icon}
+                  </div>
+                  <h3 className="text-xl font-semibold text-green-700 mb-2">
+                    {service.title}
+                  </h3>
+                  <p className="text-gray-700">{service.description}</p>
+                </motion.div>
+              ) : (
+                <div
+                  key={index}
+                  className="bg-white shadow-md hover:shadow-2xl rounded-lg p-6 flex flex-col items-center justify-center text-center"
+                >
+                  <div className="w-16 h-16 bg-green-200 rounded-full flex items-center justify-center mb-4">
+                    {service.icon}
+                  </div>
+                  <h3 className="text-xl font-semibold text-green-700 mb-2">
+                    {service.title}
+                  </h3>
+                  <p className="text-gray-700">{service.description}</p>
                 </div>
-                <h3 className="text-xl font-semibold text-green-700 mb-2">
-                  {service.title}
-                </h3>
-                <p className="text-gray-700">{service.description}</p>
-              </div>
+              )
             ))}
           </div>
         </div>
@@ -119,41 +182,102 @@ const ServicesClient = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl font-bold text-center mb-8">Why CNG?</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center text-gray-300">
-            <div className="p-6 bg-gray-900 rounded-lg shadow-md hover:bg-gray-50 hover:text-gray-900">
-              <h3 className="text-xl font-semibold mb-2 text-green-400">
-                Affordable
-              </h3>
-              <p>
-                At just ₦250 per liter, CNG is a cost-effective alternative to
-                diesel, priced at ₦1200 per liter.
-              </p>
-            </div>
-            <div className="p-6 bg-gray-900 rounded-lg shadow-md hover:bg-gray-50 hover:text-gray-900">
-              <h3 className="text-xl font-semibold mb-2 text-green-400">
-                Engine-Friendly
-              </h3>
-              <p>
-                Extend engine life and reduce maintenance costs with cleaner
-                fuel.
-              </p>
-            </div>
-            <div className="p-6 bg-gray-900 rounded-lg shadow-md hover:bg-gray-50 hover:text-gray-900">
-              <h3 className="text-xl font-semibold mb-2 text-green-400">
-                Safe and Sustainable
-              </h3>
-              <p>
-                CNG systems are safer than petrol, diesel, and LPG and have
-                advanced safety features.
-              </p>
-            </div>
+            {isClient ? (
+              <motion.div
+                className="p-6 bg-gray-900 rounded-lg shadow-md hover:bg-gray-50 hover:text-gray-900"
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: false }}
+              >
+                <h3 className="text-xl font-semibold mb-2 text-green-400">
+                  Affordable
+                </h3>
+                <p>
+                  At just ₦250 per liter, CNG is a cost-effective alternative to
+                  diesel, priced at ₦1200 per liter.
+                </p>
+              </motion.div>
+            ) : (
+              <div className="p-6 bg-gray-900 rounded-lg shadow-md hover:bg-gray-50 hover:text-gray-900">
+                <h3 className="text-xl font-semibold mb-2 text-green-400">Affordable</h3>
+                <p>At just ₦250 per liter, CNG is a cost-effective alternative to diesel, priced at ₦1200 per liter.</p>
+              </div>
+            )}
+            {isClient ? (
+              <motion.div
+                className="p-6 bg-gray-900 rounded-lg shadow-md hover:bg-gray-50 hover:text-gray-900"
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: false }}
+              >
+                <h3 className="text-xl font-semibold mb-2 text-green-400">
+                  Engine-Friendly
+                </h3>
+                <p>
+                  Extend engine life and reduce maintenance costs with cleaner
+                  fuel.
+                </p>
+              </motion.div>
+            ) : (
+              <div className="p-6 bg-gray-900 rounded-lg shadow-md hover:bg-gray-50 hover:text-gray-900">
+                <h3 className="text-xl font-semibold mb-2 text-green-400">Engine-Friendly</h3>
+                <p>Extend engine life and reduce maintenance costs with cleaner fuel.</p>
+              </div>
+            )}
+            {isClient ? (
+              <motion.div
+                className="p-6 bg-gray-900 rounded-lg shadow-md hover:bg-gray-50 hover:text-gray-900"
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: false }}
+              >
+                <h3 className="text-xl font-semibold mb-2 text-green-400">
+                  Safe and Sustainable
+                </h3>
+                <p>
+                  CNG systems are safer than petrol, diesel, and LPG and have
+                  advanced safety features.
+                </p>
+              </motion.div>
+            ) : (
+              <div className="p-6 bg-gray-900 rounded-lg shadow-md hover:bg-gray-50 hover:text-gray-900">
+                <h3 className="text-xl font-semibold mb-2 text-green-400">Safe and Sustainable</h3>
+                <p>CNG systems are safer than petrol, diesel, and LPG and have advanced safety features.</p>
+              </div>
+            )}
           </div>
         </div>
       </section>
       <section className="py-12 bg-green-700 text-white text-center">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">Partner with Us</h2>
-        <p className="text-lg mb-6">
-          Tailored CNG solutions to meet your specific requirements.
-        </p>
+        {isClient ? (
+          <motion.h2
+            className="text-3xl md:text-4xl font-bold mb-4"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: false }}
+          >
+            Partner with Us
+          </motion.h2>
+        ) : (
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Partner with Us</h2>
+        )}
+        {isClient ? (
+          <motion.p
+            className="text-lg mb-6"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: false }}
+          >
+            Tailored CNG solutions to meet your specific requirements.
+          </motion.p>
+        ) : (
+          <p className="text-lg mb-6">Tailored CNG solutions to meet your specific requirements.</p>
+        )}
         <Link href="/contact">
           <Button
             variant="solid"

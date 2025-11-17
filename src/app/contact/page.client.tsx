@@ -80,12 +80,24 @@ const ContactClient: React.FC = () => {
     <div>
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-green-800 via-green-700 to-green-900 text-white text-center py-16">
-        <h1 className="text-4xl md:text-6xl font-extrabold mb-4 text-shadow-2xl">
+        <motion.h1
+          className="text-4xl md:text-6xl font-extrabold mb-4 text-shadow-2xl"
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: false }}
+        >
           Contact Us
-        </h1>
-        <p className="text-lg md:text-2xl font-medium text-shadow-lg px-4">
+        </motion.h1>
+        <motion.p
+          className="text-lg md:text-2xl font-medium text-shadow-lg px-4"
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: false }}
+        >
           Get in Touch with CNG-Tech Edge Limited
-        </p>
+        </motion.p>
       </section>
 
       <section className="py-12 bg-white">
