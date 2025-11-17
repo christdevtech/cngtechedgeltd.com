@@ -1,6 +1,13 @@
 "use client";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { motion } from "framer-motion";
+import {
+  MobileIcon,
+  EnvelopeClosedIcon,
+  SewingPinIcon,
+  GlobeIcon,
+} from "@radix-ui/react-icons";
 
 const ContactClient: React.FC = () => {
   const {
@@ -12,6 +19,36 @@ const ContactClient: React.FC = () => {
   const [sliderValue, setSliderValue] = useState(0);
   const sliderMax = 100;
   const isSliderConfirmed = sliderValue === sliderMax;
+  const icons = [
+    <MobileIcon key="phone" width={20} height={20} />,
+    <EnvelopeClosedIcon key="email" width={20} height={20} />,
+    <SewingPinIcon key="location" width={20} height={20} />,
+    <GlobeIcon key="web" width={20} height={20} />,
+  ];
+  const infoItems = [
+    {
+      title: "Phone Numbers",
+
+      lines: ["08033104470", "08169472000"],
+    },
+    {
+      title: "Email Address",
+
+      lines: ["info@cngtechedgeltd.com"],
+      linkPrefix: "mailto:",
+    },
+    {
+      title: "Office Location",
+
+      lines: ["44A Old Aba Road, Port Harcourt"],
+    },
+    {
+      title: "Website",
+
+      lines: ["www.cngtechedgeltd.com"],
+      linkPrefix: "https://",
+    },
+  ];
 
   // @typescript-eslint/no-explicit-any
   const onSubmit = async (data: any) => {
@@ -30,7 +67,9 @@ const ContactClient: React.FC = () => {
         const err = await res.json().catch(() => ({}));
         throw new Error(err?.error || "Failed to send message");
       }
-      alert("Message sent successfully! Please check your email for a confirmation.");
+      alert(
+        "Message sent successfully! Please check your email for a confirmation."
+      );
     } catch (error: any) {
       alert(`Failed to send message: ${error?.message || "Unknown error"}`);
     }
@@ -48,49 +87,63 @@ const ContactClient: React.FC = () => {
         </p>
       </section>
 
-      {/* Contact Info Section */}
       <section className="py-12 bg-white">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <p className="text-lg text-gray-700 leading-relaxed mb-8">
-            We&apos;re here to provide innovative energy solutions and answer
-            all your questions. Let us help you embark on a journey to greener,
-            safer, and more economical energy.
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="shadow-lg rounded-lg">
-              <h3 className="text-xl font-semibold text-green-700 mb-2">
-                Phone Numbers
-              </h3>
-              <p className="text-gray-700">08033104470</p>
-              <p className="text-gray-700">08169472000</p>
-            </div>
-            <div className="shadow-lg rounded-lg">
-              <h3 className="text-xl font-semibold text-green-700 mb-2">
-                Email Address
-              </h3>
-              <p className="text-gray-700">info@cngtechedgeltd.com</p>
-            </div>
-            <div className="shadow-lg rounded-lg">
-              <h3 className="text-xl font-semibold text-green-700 mb-2">
-                Office Location
-              </h3>
-              <p className="text-gray-700">44A Old Aba Road, Port Harcourt</p>
-            </div>
-            <div className="shadow-lg rounded-lg">
-              <h3 className="text-xl font-semibold text-green-700 mb-2">
-                Website
-              </h3>
-              <p className="text-gray-700">
-                Visit us at:{" "}
-                <a
-                  href="http://www.cngtechedgeltd.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-green-600 underline">
-                  www.cngtechedgeltd.com
-                </a>
-              </p>
-            </div>
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center mb-10">
+            <p className="text-lg text-gray-700 leading-relaxed">
+              We&apos;re here to provide innovative energy solutions and answer
+              your questions. Reach out and we&apos;ll get back promptly.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {infoItems.map((item, index) => (
+              <motion.div
+                key={item.title}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.08 }}
+                viewport={{ once: true }}
+                className="group relative rounded-xl border border-gray-200 bg-white shadow hover:shadow-lg transition overflow-hidden"
+              >
+                <div className="flex items-center gap-3 px-5 pt-5">
+                  <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-green-50 text-green-700">
+                    {icons[index]}
+                  </span>
+                  <h3 className="text-lg font-semibold text-gray-900">
+                    {item.title}
+                  </h3>
+                </div>
+                <div className="px-5 pb-5 pt-3">
+                  {item.lines.map((line, i) => {
+                    const href = item.linkPrefix
+                      ? `${item.linkPrefix}${line.replace(/^https?:\/\//, "")}`
+                      : undefined;
+                    return href ? (
+                      <a
+                        key={i}
+                        href={href}
+                        target={
+                          item.linkPrefix === "https://" ? "_blank" : undefined
+                        }
+                        rel={
+                          item.linkPrefix === "https://"
+                            ? "noopener noreferrer"
+                            : undefined
+                        }
+                        className="block text-green-700 hover:text-green-900 underline break-words"
+                      >
+                        {line}
+                      </a>
+                    ) : (
+                      <p key={i} className="text-gray-700">
+                        {line}
+                      </p>
+                    );
+                  })}
+                </div>
+                <div className="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-green-600 via-green-500 to-green-700 opacity-0 group-hover:opacity-100 transition" />
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
@@ -107,11 +160,13 @@ const ContactClient: React.FC = () => {
           </p>
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="bg-white shadow-lg rounded-lg p-8 space-y-6">
+            className="bg-white shadow-lg rounded-lg p-8 space-y-6"
+          >
             <div>
               <label
                 htmlFor="name"
-                className="block text-sm font-medium text-gray-700">
+                className="block text-sm font-medium text-gray-700"
+              >
                 Name
               </label>
               <input
@@ -130,7 +185,8 @@ const ContactClient: React.FC = () => {
               <div className="flex-1">
                 <label
                   htmlFor="email"
-                  className="block text-sm font-medium text-gray-700">
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Email
                 </label>
                 <input
@@ -154,7 +210,8 @@ const ContactClient: React.FC = () => {
               <div className="flex-1">
                 <label
                   htmlFor="phone"
-                  className="block text-sm font-medium text-gray-700">
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Phone Number
                 </label>
                 <input
@@ -181,7 +238,8 @@ const ContactClient: React.FC = () => {
             <div>
               <label
                 htmlFor="message"
-                className="block text-sm font-medium text-gray-700">
+                className="block text-sm font-medium text-gray-700"
+              >
                 Message
               </label>
               <textarea
@@ -195,7 +253,9 @@ const ContactClient: React.FC = () => {
               )}
             </div>
             <div className="space-y-2">
-              <label className="block text-sm font-medium text-gray-700">Slide to enable sending</label>
+              <label className="block text-sm font-medium text-gray-700">
+                Slide to enable sending
+              </label>
               <input
                 type="range"
                 min={0}
@@ -207,8 +267,13 @@ const ContactClient: React.FC = () => {
               <button
                 type="submit"
                 className="w-full py-3 bg-green-600 text-white font-bold rounded-md hover:bg-green-700 transition disabled:opacity-50"
-                disabled={isSubmitting || !isSliderConfirmed}>
-                {isSubmitting ? "Sending..." : isSliderConfirmed ? "Send Message" : "Slide to Enable"}
+                disabled={isSubmitting || !isSliderConfirmed}
+              >
+                {isSubmitting
+                  ? "Sending..."
+                  : isSliderConfirmed
+                  ? "Send Message"
+                  : "Slide to Enable"}
               </button>
             </div>
           </form>
@@ -225,7 +290,8 @@ const ContactClient: React.FC = () => {
         </p>
         <a
           href="tel:08033104470"
-          className="bg-white text-green-700 font-bold px-6 py-3 rounded-md shadow-md hover:bg-gray-100">
+          className="bg-white text-green-700 font-bold px-6 py-3 rounded-md shadow-md hover:bg-gray-100"
+        >
           Call Us Now
         </a>
       </section>

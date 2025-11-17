@@ -30,14 +30,16 @@ const Header = () => {
             src={"/images/CNGTechlogo.png"}
             width="180"
             height="60"
-            alt="Logo"></Image>
+            alt="Logo"
+          ></Image>
         </Link>
         <div className="hidden md:flex gap-3">
           {tabNavItems.map((item, index) => (
             <Button
               size={"2"}
               key={index}
-              variant={pathname === item.href ? "solid" : "soft"}>
+              variant={pathname === item.href ? "solid" : "soft"}
+            >
               <Link href={item.href}>{item.label}</Link>
             </Button>
           ))}
@@ -46,7 +48,8 @@ const Header = () => {
           <IconButton
             color="grass"
             variant="soft"
-            onClick={() => setMenuOpen(!menuOpen)}>
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
             {!menuOpen && <HamburgerMenuIcon />}
             {menuOpen && <Cross1Icon />}
           </IconButton>
@@ -55,7 +58,8 @@ const Header = () => {
         <div
           className={`fixed top-0 left-0 h-full bg-white shadow-md transform transition-transform duration-300 z-50 ${
             menuOpen ? "translate-x-0" : "-translate-x-full"
-          } w-[300] md:hidden`}>
+          } w-[300px] md:hidden`}
+        >
           <div className="p-4">
             {tabNavItems.map((item, index) => (
               <div key={index} className="mb-3">
@@ -65,7 +69,8 @@ const Header = () => {
                       pathname === item.href
                         ? "bg-green-500 text-white font-semibold"
                         : "bg-gray-100 text-gray-800 hover:bg-green-100 hover:text-green-600"
-                    }`}>
+                    }`}
+                  >
                     {item.label}
                   </div>
                 </Link>
