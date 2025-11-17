@@ -29,18 +29,16 @@ const ContactClient: React.FC = () => {
   const infoItems = [
     {
       title: "Phone Numbers",
-
-      lines: ["08033104470", "08169472000"],
+      lines: ["+23408033104470", "+23408169472000"],
+      linkPrefix: "tel:",
     },
     {
       title: "Email Address",
-
       lines: ["info@cngtechedgeltd.com"],
       linkPrefix: "mailto:",
     },
     {
       title: "Office Location",
-
       lines: ["44A Old Aba Road, Port Harcourt"],
     },
     {
@@ -302,7 +300,7 @@ const ContactClient: React.FC = () => {
           Contact us today to explore tailored energy solutions for your needs.
         </p>
         <a
-          href="tel:08033104470"
+          href="tel:+23408033104470"
           className="bg-white text-green-700 font-bold px-6 py-3 rounded-md shadow-md hover:bg-gray-100"
         >
           Call Us Now
