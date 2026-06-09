@@ -230,9 +230,9 @@ const ContactClient: React.FC = () => {
                   {...register("phone", {
                     required: "Phone number is required",
                     pattern: {
-                      value: /^[0-9]{10,15}$/,
+                      value: /^\+?[0-9]{10,15}$/,
                       message:
-                        "Invalid phone number. Use 10 to 15 digits without special characters.",
+                        "Invalid phone number. Use 10 to 15 digits, optionally starting with '+'.",
                     },
                   })}
                   type="tel"
